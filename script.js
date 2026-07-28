@@ -1,3 +1,16 @@
+function setAnswers(answers) {
+   document.getElementById("answers").innerHTML = ``;
+
+   for (let i = 0; i < answers.length; i++) {
+
+  document.getElementById("answers").innerHTML += `
+	    <button onclick="checkAnswer('${answers[i]}')">
+	    ${answers[i]} 
+    </button>
+    `;
+}
+} 
+
 function startGame() {
     document.getElementById("title").style.display = "none";
     document.getElementById("subtitle").style.display = "none";
@@ -5,6 +18,9 @@ function startGame() {
     document.getElementById("question").textContent = 
 questions[0].question;
 
+setAnswers(questions[currentQuestion].answers);
+
+/*
 document.getElementById("answers").innerHTML =
 `
 
@@ -13,7 +29,7 @@ document.getElementById("answers").innerHTML =
 <button onclick="checkAnswer('JavaScript')">JavaScript</button>
 <button onclick="checkAnswer('Python')">Python</button>
 `;
-
+*/
 }
 
 let currentQuestion = 0;
@@ -34,21 +50,8 @@ if (currentQuestion < questions.length) {
     document.getElementById("question").textContent =
     questions[currentQuestion].question;
 
-    document.getElementById("answers").innerHTML = `
-    <button onclick="checkAnswer('${questions[currentQuestion].answers[0]}')">
-    ${questions[currentQuestion].answers[0]}
-    </button>
-    <button onclick="checkAnswer('${questions[currentQuestion].answers[1]}')">
-    ${questions[currentQuestion].answers[1]}
-    </button>
-    <button onclick="checkAnswer('${questions[currentQuestion].answers[2]}')">
-    ${questions[currentQuestion].answers[2]}
-    </button>
-    <button onclick="checkAnswer('${questions[currentQuestion].answers[3]}')">
-    ${questions[currentQuestion].answers[3]}
-    </button>
-    `;
-
+setAnswers(questions[currentQuestion].answers);
+   
 } else {
     document.getElementById("message").textContent =
     "Game Over! Final score: " + score;
