@@ -2,8 +2,7 @@ function setAnswers(answers) {
    document.getElementById("answers").innerHTML = ``;
 
    for (let i = 0; i < answers.length; i++) {
-
-  document.getElementById("answers").innerHTML += `
+     document.getElementById("answers").innerHTML += `
 	    <button onclick="checkAnswer('${answers[i]}')">
 	    ${answers[i]} 
     </button>
@@ -11,25 +10,39 @@ function setAnswers(answers) {
 }
 } 
 
-function startGame() {
+function setMessage(message) {
+    document.getElementById("message").textContent = message;
+}
+
+function startGame() { 
     document.getElementById("title").style.display = "none";
     document.getElementById("subtitle").style.display = "none";
     document.getElementById("startBtn").style.display = "none";
-    document.getElementById("question").textContent = 
-questions[0].question;
+    document.getElementById("question").textContent = questions[0].question;
 
 setAnswers(questions[currentQuestion].answers);
+}
 
-/*
-document.getElementById("answers").innerHTML =
-`
 
-<button onclick="checkAnswer('HTML')">HTML</button>
-<button onclick="checkAnswer('CSS')">CSS</button>
-<button onclick="checkAnswer('JavaScript')">JavaScript</button>
-<button onclick="checkAnswer('Python')">Python</button>
-`;
-*/
+function checkAnswer(answer) {
+if (answer === questions[currentQuestion].correct) {
+    score++;
+    setMessage("Correct!");
+} else {
+    setMessage("incorrect");
+}
+document.getElementById("score").textCentent = "score: " + score;
+
+// Move to next question
+currentQuestion++;
+if (currentQuestion < questions.length) {
+   document.getElementById("question").textcontent =
+   questions[currentQuestion].question;
+   
+   setAnswers(questions[currentQuestion].answers);
+} else {
+    setMessage("Game Over! Final score: " + score);
+}
 }
 
 let currentQuestion = 0;
