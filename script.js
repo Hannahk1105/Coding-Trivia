@@ -23,6 +23,15 @@ function startGame() {
 setAnswers(questions[currentQuestion].answers);
 }
 
+function playAgain() {
+    currentQuestion = 0;
+    score = 0;
+    setMessage("");
+    document.getElementById("score").textContent = "";
+    startGame();
+    document.getElementById("playAgainBtn").style.display = "none";
+}
+document.getElementById("playAgainBtn").onclick = playAgain;
 
 function checkAnswer(answer) {
 if (answer === questions[currentQuestion].correct) {
@@ -42,35 +51,13 @@ if (currentQuestion < questions.length) {
    setAnswers(questions[currentQuestion].answers);
 } else {
     setMessage("Game Over! Final score: " + score);
+    document.getElementById("playAgainBtn").style.display = "block";
 }
 }
 
 let currentQuestion = 0;
 let score = 0;
-
-function checkAnswer(answer) {
-    if (answer === questions[currentQuestion].correct) {
-        score++;
-        document.getElementById("message").textContent = "Correct!";
-    } else {
-        document.getElementById("message").textContent = "Incorrect!";
-    }
-    document.getElementById("score").textContent = "Score: " + score;
-
-// Move to next question
-currentQuestion++;
-if (currentQuestion < questions.length) {
-    document.getElementById("question").textContent =
-    questions[currentQuestion].question;
-
-setAnswers(questions[currentQuestion].answers);
    
-} else {
-    document.getElementById("message").textContent =
-    "Game Over! Final score: " + score;
-}
-    }
-
 const questions = [
     {
         question: "What language is used to style web pages?",
